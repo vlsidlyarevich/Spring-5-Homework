@@ -2,13 +2,11 @@ package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
+import com.github.vlsidlyarevich.spring5homework.converters.RecipeCommandToRecipe;
+import com.github.vlsidlyarevich.spring5homework.converters.RecipeToRecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.commands.RecipeCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.converters.RecipeCommandToRecipe;
-import com.vlsidlyarevich.spring5homework.converters.RecipeToRecipeCommand;
-import com.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
-import com.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import com.github.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

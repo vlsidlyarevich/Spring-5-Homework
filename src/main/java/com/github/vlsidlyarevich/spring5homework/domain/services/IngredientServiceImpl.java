@@ -1,16 +1,12 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
+import com.github.vlsidlyarevich.spring5homework.converters.IngredientCommandToIngredient;
 import com.github.vlsidlyarevich.spring5homework.converters.IngredientToIngredientCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Ingredient;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.commands.IngredientCommand;
-import com.vlsidlyarevich.spring5homework.converters.IngredientToIngredientCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Ingredient;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.converters.IngredientCommandToIngredient;
-import com.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
-import com.vlsidlyarevich.spring5homework.domain.repositories.UnitOfMeasureRepository;
+import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import com.github.vlsidlyarevich.spring5homework.domain.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

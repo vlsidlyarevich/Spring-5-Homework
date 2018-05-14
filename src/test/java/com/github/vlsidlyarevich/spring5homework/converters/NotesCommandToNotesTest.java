@@ -2,8 +2,6 @@ package com.github.vlsidlyarevich.spring5homework.converters;
 
 import com.github.vlsidlyarevich.spring5homework.commands.NotesCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Notes;
-import com.vlsidlyarevich.spring5homework.commands.NotesCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Notes;
 import org.junit.Before;
 import org.junit.Test;
 

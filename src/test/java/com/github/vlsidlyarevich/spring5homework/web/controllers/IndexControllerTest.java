@@ -2,8 +2,6 @@ package com.github.vlsidlyarevich.spring5homework.web.controllers;
 
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.services.RecipeService;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.domain.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

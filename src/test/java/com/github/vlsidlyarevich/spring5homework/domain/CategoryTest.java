@@ -1,7 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.domain;
 
 import com.github.vlsidlyarevich.spring5homework.domain.model.Category;
-import com.vlsidlyarevich.spring5homework.domain.model.Category;
 import org.junit.Before;
 import org.junit.Test;
 

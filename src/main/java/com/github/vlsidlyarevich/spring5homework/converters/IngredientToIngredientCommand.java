@@ -2,8 +2,6 @@ package com.github.vlsidlyarevich.spring5homework.converters;
 
 import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Ingredient;
-import com.vlsidlyarevich.spring5homework.commands.IngredientCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Ingredient;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;

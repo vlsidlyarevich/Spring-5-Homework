@@ -37,7 +37,7 @@ dependencies {
     compile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo'
     compile group: 'cz.jirutka.spring', name: 'embedmongo-spring', version: embedMongoSpringVersion
 
-    compile group: 'rg.webjars', name: 'bootstrap', version: bootstrapVersion
+    compile group: 'org.webjars', name: 'bootstrap', version: bootstrapVersion
 
     compileOnly('org.projectlombok:lombok')
 

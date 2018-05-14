@@ -1,7 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
-import com.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
 
 import java.util.Set;
 

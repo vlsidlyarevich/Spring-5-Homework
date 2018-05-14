@@ -1,7 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
-import com.vlsidlyarevich.spring5homework.commands.IngredientCommand;
 
 /**
  * Created by jt on 6/27/17.

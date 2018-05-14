@@ -2,8 +2,6 @@ package com.github.vlsidlyarevich.spring5homework.converters;
 
 import com.github.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.UnitOfMeasure;
-import com.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.UnitOfMeasure;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;

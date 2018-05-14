@@ -1,7 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.domain.repositories;
 
 import com.github.vlsidlyarevich.spring5homework.domain.model.UnitOfMeasure;
-import com.vlsidlyarevich.spring5homework.domain.model.UnitOfMeasure;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

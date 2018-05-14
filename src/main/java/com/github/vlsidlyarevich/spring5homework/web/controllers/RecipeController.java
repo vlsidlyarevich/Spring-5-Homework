@@ -2,9 +2,7 @@ package com.github.vlsidlyarevich.spring5homework.web.controllers;
 
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.services.RecipeService;
-import com.vlsidlyarevich.spring5homework.commands.RecipeCommand;
-import com.vlsidlyarevich.spring5homework.domain.services.RecipeService;
-import com.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
+import com.github.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

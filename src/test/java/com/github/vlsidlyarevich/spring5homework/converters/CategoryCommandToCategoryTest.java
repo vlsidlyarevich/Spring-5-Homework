@@ -2,8 +2,6 @@ package com.github.vlsidlyarevich.spring5homework.converters;
 
 import com.github.vlsidlyarevich.spring5homework.commands.CategoryCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Category;
-import com.vlsidlyarevich.spring5homework.commands.CategoryCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Category;
 import org.junit.Before;
 import org.junit.Test;
 

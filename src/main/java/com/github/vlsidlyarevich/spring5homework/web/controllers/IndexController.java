@@ -1,7 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.web.controllers;
 
 import com.github.vlsidlyarevich.spring5homework.domain.services.RecipeService;
-import com.vlsidlyarevich.spring5homework.domain.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

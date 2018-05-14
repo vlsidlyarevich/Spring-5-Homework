@@ -1,8 +1,7 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
-import com.vlsidlyarevich.spring5homework.commands.RecipeCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
+import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 
 import java.util.Set;
 

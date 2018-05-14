@@ -1,8 +1,7 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

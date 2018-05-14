@@ -6,12 +6,6 @@ import com.github.vlsidlyarevich.spring5homework.commands.NotesCommand;
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Difficulty;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.commands.CategoryCommand;
-import com.vlsidlyarevich.spring5homework.commands.IngredientCommand;
-import com.vlsidlyarevich.spring5homework.commands.NotesCommand;
-import com.vlsidlyarevich.spring5homework.commands.RecipeCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Difficulty;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import org.junit.Before;
 import org.junit.Test;
 

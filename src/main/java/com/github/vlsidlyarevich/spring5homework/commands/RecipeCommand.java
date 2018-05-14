@@ -1,6 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.commands;
 
-import com.vlsidlyarevich.spring5homework.domain.model.Difficulty;
+import com.github.vlsidlyarevich.spring5homework.domain.model.Difficulty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

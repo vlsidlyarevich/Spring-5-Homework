@@ -4,10 +4,6 @@ import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
 import com.github.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Ingredient;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
-import com.vlsidlyarevich.spring5homework.commands.IngredientCommand;
-import com.vlsidlyarevich.spring5homework.commands.UnitOfMeasureCommand;
-import com.vlsidlyarevich.spring5homework.domain.model.Ingredient;
-import com.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import org.junit.Before;
 import org.junit.Test;
 
