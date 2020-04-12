@@ -2,27 +2,21 @@ package com.github.vlsidlyarevich.spring5homework.domain.services;
 
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-/**
- * Created by jt on 7/3/17.
- */
 @Slf4j
 @Service
-public class ImageServiceImpl implements ImageService {
-
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class RecipeAwareImageService implements ImageService {
 
     private final RecipeRepository recipeRepository;
-
-    public ImageServiceImpl( RecipeRepository recipeService) {
-
-        this.recipeRepository = recipeService;
-    }
 
     @Override
     @Transactional
@@ -35,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
 
             int i = 0;
 
-            for (byte b : file.getBytes()){
+            for (byte b : file.getBytes()) {
                 byteObjects[i++] = b;
             }
 

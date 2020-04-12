@@ -1,6 +1,5 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
-
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.converters.RecipeCommandToRecipe;
 import com.github.vlsidlyarevich.spring5homework.converters.RecipeToRecipeCommand;
@@ -20,12 +19,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
-/**
- * Created by jt on 6/17/17.
- */
+
 public class RecipeServiceImplTest {
 
-    RecipeServiceImpl recipeService;
+    DefaultRecipeService recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -40,7 +37,7 @@ public class RecipeServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+        recipeService = new DefaultRecipeService(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test

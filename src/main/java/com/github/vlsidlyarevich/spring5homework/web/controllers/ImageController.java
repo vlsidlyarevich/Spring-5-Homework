@@ -3,7 +3,9 @@ package com.github.vlsidlyarevich.spring5homework.web.controllers;
 import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.services.ImageService;
 import com.github.vlsidlyarevich.spring5homework.domain.services.RecipeService;
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,19 +19,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by jt on 7/3/17.
- */
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ImageController {
 
     private final ImageService imageService;
     private final RecipeService recipeService;
-
-    public ImageController(ImageService imageService, RecipeService recipeService) {
-        this.imageService = imageService;
-        this.recipeService = recipeService;
-    }
 
     @GetMapping("recipe/{id}/image")
     public String showUploadForm(@PathVariable String id, Model model){
@@ -40,7 +35,6 @@ public class ImageController {
 
     @PostMapping("recipe/{id}/image")
     public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file){
-
         imageService.saveImageFile(id, file);
 
         return "redirect:/recipe/" + id + "/show";

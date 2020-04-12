@@ -3,21 +3,17 @@ package com.github.vlsidlyarevich.spring5homework.converters;
 import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Ingredient;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by jt on 6/21/17.
- */
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 
     private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
-
-    public IngredientCommandToIngredient(UnitOfMeasureCommandToUnitOfMeasure uomConverter) {
-        this.uomConverter = uomConverter;
-    }
 
     @Nullable
     @Override

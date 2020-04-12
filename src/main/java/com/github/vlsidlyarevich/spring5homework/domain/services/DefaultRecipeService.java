@@ -6,7 +6,9 @@ import com.github.vlsidlyarevich.spring5homework.converters.RecipeToRecipeComman
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
 import com.github.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,22 +16,14 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Slf4j
 @Service
-public class RecipeServiceImpl implements RecipeService {
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class DefaultRecipeService implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
-
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe, RecipeToRecipeCommand recipeToRecipeCommand) {
-        this.recipeRepository = recipeRepository;
-        this.recipeCommandToRecipe = recipeCommandToRecipe;
-        this.recipeToRecipeCommand = recipeToRecipeCommand;
-    }
 
     @Override
     public Set<Recipe> getRecipes() {
@@ -46,7 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new NotFoundException("Recipe Not Found. For ID value: " + id );
+            throw new NotFoundException("Recipe Not Found. For ID value: " + id);
         }
 
         return recipeOptional.get();
@@ -59,7 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeCommand recipeCommand = recipeToRecipeCommand.convert(findById(id));
 
         //enhance command object with id value
-        if(recipeCommand.getIngredients() != null && recipeCommand.getIngredients().size() > 0){
+        if (recipeCommand.getIngredients() != null && recipeCommand.getIngredients().size() > 0) {
             recipeCommand.getIngredients().forEach(rc -> {
                 rc.setRecipeId(recipeCommand.getId());
             });
