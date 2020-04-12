@@ -20,7 +20,7 @@ public class ReactiveUnitOfMeasureService implements UnitOfMeasureService {
     @Override
     public Set<UnitOfMeasureCommand> listAllUoms() {
         return repository.findAll()
-                .map(unitOfMeasure -> commandConverter.convert(unitOfMeasure))
+                .map(commandConverter::convert)
                 .collect(Collectors.toSet())
                 .block();
     }
