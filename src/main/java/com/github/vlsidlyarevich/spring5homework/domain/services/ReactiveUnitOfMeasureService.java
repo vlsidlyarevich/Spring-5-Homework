@@ -6,9 +6,7 @@ import com.github.vlsidlyarevich.spring5homework.domain.repositories.reactive.Un
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -18,10 +16,8 @@ public class ReactiveUnitOfMeasureService implements UnitOfMeasureService {
     private final UnitOfMeasureToUnitOfMeasureCommand commandConverter;
 
     @Override
-    public Set<UnitOfMeasureCommand> listAllUoms() {
+    public Flux<UnitOfMeasureCommand> listAllUoms() {
         return repository.findAll()
-                .map(commandConverter::convert)
-                .collect(Collectors.toSet())
-                .block();
+                .map(commandConverter::convert);
     }
 }
