@@ -27,8 +27,6 @@ public class DefaultRecipeService implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        log.debug("I'm in the service");
-
         Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
@@ -36,7 +34,6 @@ public class DefaultRecipeService implements RecipeService {
 
     @Override
     public Recipe findById(String id) {
-
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
@@ -49,14 +46,11 @@ public class DefaultRecipeService implements RecipeService {
     @Override
     @Transactional
     public RecipeCommand findCommandById(String id) {
-
         RecipeCommand recipeCommand = recipeToRecipeCommand.convert(findById(id));
 
         //enhance command object with id value
         if (recipeCommand.getIngredients() != null && recipeCommand.getIngredients().size() > 0) {
-            recipeCommand.getIngredients().forEach(rc -> {
-                rc.setRecipeId(recipeCommand.getId());
-            });
+            recipeCommand.getIngredients().forEach(rc -> rc.setRecipeId(recipeCommand.getId()));
         }
 
         return recipeCommand;
