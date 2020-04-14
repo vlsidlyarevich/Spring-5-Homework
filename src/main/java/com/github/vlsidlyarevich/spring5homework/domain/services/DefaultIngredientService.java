@@ -3,7 +3,6 @@ package com.github.vlsidlyarevich.spring5homework.domain.services;
 import com.github.vlsidlyarevich.spring5homework.commands.IngredientCommand;
 import com.github.vlsidlyarevich.spring5homework.converters.IngredientCommandToIngredient;
 import com.github.vlsidlyarevich.spring5homework.converters.IngredientToIngredientCommand;
-import com.github.vlsidlyarevich.spring5homework.domain.model.Ingredient;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.reactive.RecipeReactiveRepository;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.reactive.UnitOfMeasureReactiveRepository;
@@ -11,8 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -26,19 +26,17 @@ public class DefaultIngredientService implements IngredientService {
 
     @Override
     public Mono<IngredientCommand> findByRecipeIdAndIngredientId(String recipeId, String ingredientId) {
-        Mono<Recipe> recipe = recipeRepository.findById(recipeId).cache();
-
-        Flux<Ingredient> ingredients = recipe.flux().flatMap(r -> Flux.fromIterable(r.getIngredients()));
-
-        Mono<IngredientCommand> result = ingredients
-                .filter(ingredient -> ingredient.getId().equals(ingredientId))
-                .singleOrEmpty()
-                .map(ingredientToIngredientCommand::convert);
-
-        return Flux.zip(recipe, result, (Recipe rec, IngredientCommand command) -> {
-            command.setRecipeId(rec.getId());
-            return command;
-        }).singleOrEmpty();
+        return recipeRepository.findById(recipeId)
+                .map(Recipe::getIngredients)
+                .map(ingredients -> ingredients.stream()
+                        .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                        .findFirst())
+                .filter(Optional::isPresent)
+                .map(ingredient -> {
+                    IngredientCommand ingredientCommand = ingredientToIngredientCommand.convert(ingredient.get());
+                    ingredientCommand.setRecipeId(recipeId);
+                    return ingredientCommand;
+                });
     }
 
     @Override
