@@ -104,8 +104,11 @@ public class DefaultIngredientService implements IngredientService {
         log.debug("Deleting ingredient: " + recipeId + ":" + idToDelete);
 
         recipeReactiveRepository.findById(recipeId)
-                .doOnSuccess(recipe -> {
-                    if (recipe == null) return;
+                .map(recipe -> {
+                    if (recipe == null) {
+                        log.debug("Recipe Id Not found. Id:" + recipeId);
+                        return Mono.empty();
+                    }
 
                     log.debug("found recipe");
 
@@ -117,13 +120,13 @@ public class DefaultIngredientService implements IngredientService {
 
                     if (ingredientOptional.isPresent()) {
                         log.debug("found Ingredient");
-                        Ingredient ingredientToDelete = ingredientOptional.get();
-                        // ingredientToDelete.setRecipe(null);
                         recipe.getIngredients().remove(ingredientOptional.get());
-                        recipeReactiveRepository.save(recipe);
                     }
-                }).doOnSuccess(recipe -> {
-            if (recipe == null) log.debug("Recipe Id Not found. Id:" + recipeId);
-        }).block();
+
+                    //TODO why it's not working if return dat
+                    recipeReactiveRepository.save(recipe).block();
+                    return recipe;
+                }).log()
+                .subscribe();
     }
 }
