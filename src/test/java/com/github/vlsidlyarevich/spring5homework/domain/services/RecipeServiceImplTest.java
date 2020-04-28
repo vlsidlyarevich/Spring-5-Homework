@@ -5,15 +5,19 @@ import com.github.vlsidlyarevich.spring5homework.converters.RecipeCommandToRecip
 import com.github.vlsidlyarevich.spring5homework.converters.RecipeToRecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.RecipeRepository;
+import com.github.vlsidlyarevich.spring5homework.domain.repositories.reactive.RecipeReactiveRepository;
 import com.github.vlsidlyarevich.spring5homework.exceptions.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import reactor.core.publisher.Flux;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,16 +32,20 @@ public class RecipeServiceImplTest {
     RecipeRepository recipeRepository;
 
     @Mock
+    RecipeReactiveRepository recipeReactiveRepository;
+
+    @Mock
     RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
 
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new DefaultRecipeService(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+        recipeService = new DefaultRecipeService(recipeRepository, recipeReactiveRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -48,7 +56,7 @@ public class RecipeServiceImplTest {
 
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned = recipeService.findById("1");
+        Recipe recipeReturned = recipeService.findById("1").block();
 
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository, times(1)).findById(anyString());
@@ -62,7 +70,7 @@ public class RecipeServiceImplTest {
 
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned = recipeService.findById("1");
+        Recipe recipeReturned = recipeService.findById("1").block();
 
         //should go boom
     }
@@ -80,7 +88,7 @@ public class RecipeServiceImplTest {
 
         when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
 
-        RecipeCommand commandById = recipeService.findCommandById("1");
+        RecipeCommand commandById = recipeService.findCommandById("1").block();
 
         assertNotNull("Null recipe returned", commandById);
         verify(recipeRepository, times(1)).findById(anyString());
@@ -89,14 +97,12 @@ public class RecipeServiceImplTest {
 
     @Test
     public void getRecipesTest() throws Exception {
-
         Recipe recipe = new Recipe();
-        HashSet receipesData = new HashSet();
-        receipesData.add(recipe);
 
-        when(recipeService.getRecipes()).thenReturn(receipesData);
+        when(recipeService.getRecipes()).thenReturn(Flux.just(recipe));
 
-        Set<Recipe> recipes = recipeService.getRecipes();
+        List<Recipe> recipes = recipeService.getRecipes().toStream()
+                .collect(Collectors.toList());
 
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
