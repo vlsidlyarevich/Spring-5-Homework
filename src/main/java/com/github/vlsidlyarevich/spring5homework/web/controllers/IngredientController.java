@@ -45,7 +45,7 @@ public class IngredientController {
     }
 
     @GetMapping("recipe/{recipeId}/ingredient/new")
-    public String newRecipe(@PathVariable String recipeId, Model model) {
+    public String newIngredient(@PathVariable String recipeId, Model model) {
 
         //make sure we have a good id value
         RecipeCommand recipeCommand = recipeService.findCommandById(recipeId).block();
@@ -53,6 +53,7 @@ public class IngredientController {
 
         //need to return back parent id for hidden form property
         IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeId);
         model.addAttribute("ingredient", ingredientCommand);
 
         //init uom

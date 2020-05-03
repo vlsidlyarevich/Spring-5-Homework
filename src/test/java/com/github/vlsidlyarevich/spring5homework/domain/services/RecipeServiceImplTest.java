@@ -13,10 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Flux;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
-    DefaultRecipeService recipeService;
+    ReactiveRecipeService recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -45,7 +43,7 @@ public class RecipeServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new DefaultRecipeService(recipeRepository, recipeReactiveRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+        recipeService = new ReactiveRecipeService(recipeRepository, recipeReactiveRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test

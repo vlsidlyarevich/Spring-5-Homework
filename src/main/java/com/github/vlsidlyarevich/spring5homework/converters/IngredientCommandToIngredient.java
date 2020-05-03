@@ -23,6 +23,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
         }
 
         final Ingredient ingredient = new Ingredient();
+        //TODO it is broken, because we rely on uuid generation
         ingredient.setId(source.getId());
 
         if(source.getRecipeId() != null){
