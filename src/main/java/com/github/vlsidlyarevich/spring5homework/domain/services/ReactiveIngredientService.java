@@ -43,10 +43,7 @@ public class ReactiveIngredientService implements IngredientService {
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
         //TODO it smells
         return recipeReactiveRepository.findById(command.getRecipeId())
-                .switchIfEmpty(Mono.defer(() -> {
-                    log.error("Recipe not found for id: " + command.getRecipeId());
-                    return Mono.error(new NotFoundException("Recipe not found for id: " + command.getRecipeId()));
-                }))
+                .switchIfEmpty(Mono.error(new NotFoundException("Recipe not found for id: " + command.getRecipeId())))
                 .map(recipe -> {
                     Optional<Ingredient> ingredientOptional = recipe
                             .getIngredients()
