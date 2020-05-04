@@ -35,7 +35,7 @@ public class ImageController {
 
     @PostMapping("recipe/{id}/image")
     public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file) {
-        imageService.saveImageFile(id, file).subscribe();
+        imageService.saveImageFile(id, file);
 
         return "redirect:/recipe/" + id + "/show";
     }

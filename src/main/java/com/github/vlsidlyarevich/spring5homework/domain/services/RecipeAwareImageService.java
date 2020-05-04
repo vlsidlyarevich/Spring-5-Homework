@@ -1,5 +1,6 @@
 package com.github.vlsidlyarevich.spring5homework.domain.services;
 
+import com.github.vlsidlyarevich.spring5homework.domain.model.Recipe;
 import com.github.vlsidlyarevich.spring5homework.domain.repositories.reactive.RecipeReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ public class RecipeAwareImageService implements ImageService {
     @Override
     @Transactional
     public Mono<Void> saveImageFile(String recipeId, MultipartFile file) {
-        recipeRepository.findById(recipeId)
+        Mono<Recipe> recipeMono = recipeRepository.findById(recipeId)
                 .flatMap(recipe -> {
                     try {
                         Byte[] byteObjects = new Byte[file.getBytes().length];
@@ -38,7 +39,9 @@ public class RecipeAwareImageService implements ImageService {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }).publish(recipeMono -> recipeRepository.save(recipeMono.block()));
+                });
+
+        recipeRepository.save(recipeMono.block());
 
         return Mono.empty();
     }
