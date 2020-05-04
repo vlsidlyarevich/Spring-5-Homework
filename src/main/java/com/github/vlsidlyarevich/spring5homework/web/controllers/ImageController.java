@@ -27,15 +27,15 @@ public class ImageController {
     private final RecipeService recipeService;
 
     @GetMapping("recipe/{id}/image")
-    public String showUploadForm(@PathVariable String id, Model model){
+    public String showUploadForm(@PathVariable String id, Model model) {
         model.addAttribute("recipe", recipeService.findCommandById(id).block());
 
         return "recipe/imageuploadform";
     }
 
     @PostMapping("recipe/{id}/image")
-    public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file){
-        imageService.saveImageFile(id, file);
+    public String handleImagePost(@PathVariable String id, @RequestParam("imagefile") MultipartFile file) {
+        imageService.saveImageFile(id, file).subscribe();
 
         return "redirect:/recipe/" + id + "/show";
     }
@@ -48,7 +48,7 @@ public class ImageController {
             byte[] byteArray = new byte[recipeCommand.getImage().length];
             int i = 0;
 
-            for (Byte wrappedByte : recipeCommand.getImage()){
+            for (Byte wrappedByte : recipeCommand.getImage()) {
                 byteArray[i++] = wrappedByte; //auto unboxing
             }
 
