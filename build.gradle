@@ -32,7 +32,6 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
 
