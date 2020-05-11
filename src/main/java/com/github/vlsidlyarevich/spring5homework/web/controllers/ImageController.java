@@ -1,6 +1,5 @@
 package com.github.vlsidlyarevich.spring5homework.web.controllers;
 
-import com.github.vlsidlyarevich.spring5homework.commands.RecipeCommand;
 import com.github.vlsidlyarevich.spring5homework.domain.services.ImageService;
 import com.github.vlsidlyarevich.spring5homework.domain.services.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ImageController {
@@ -26,7 +21,7 @@ public class ImageController {
 
     @GetMapping("recipe/{id}/image")
     public String showUploadForm(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findCommandById(id).block());
+        model.addAttribute("recipe", recipeService.findCommandById(id));
 
         return "recipe/imageuploadform";
     }

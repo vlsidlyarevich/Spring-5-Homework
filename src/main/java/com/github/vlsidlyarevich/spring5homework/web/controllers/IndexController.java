@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.stream.Collectors;
-
 @Slf4j
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -20,9 +18,7 @@ public class IndexController {
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model) {
         log.debug("Getting Index page");
-        model.addAttribute("recipes", recipeService.getRecipes()
-                .toStream()
-                .collect(Collectors.toList()));
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
