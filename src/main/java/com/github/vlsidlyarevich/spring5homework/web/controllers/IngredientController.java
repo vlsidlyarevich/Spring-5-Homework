@@ -11,7 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +28,13 @@ public class IngredientController {
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
     private final UnitOfMeasureService unitOfMeasureService;
+
+    private WebDataBinder dataBinder;
+
+    @InitBinder
+    private void init(WebDataBinder webDataBinder) {
+        this.dataBinder = webDataBinder;
+    }
 
     @GetMapping("/recipe/{recipeId}/ingredients")
     public String listIngredients(@PathVariable String recipeId, Model model) {
@@ -72,7 +82,15 @@ public class IngredientController {
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command) {
+        dataBinder.validate();
+        BindingResult bindingResult = dataBinder.getBindingResult();
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return "recipe/ingredient/ingredientform";
+        }
+
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
 
         log.debug("saved ingredient id:" + savedCommand.getId());
