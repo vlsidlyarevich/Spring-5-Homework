@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,12 @@ public class RecipeController {
     private static final String RECIPE_RECIPEFORM_URL = "recipe/recipeform";
 
     private final RecipeService recipeService;
+    private WebDataBinder dataBinder;
+
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        this.dataBinder = webDataBinder;
+    }
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model) {
@@ -47,7 +55,9 @@ public class RecipeController {
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
+    public String saveOrUpdate(@ModelAttribute("recipe") RecipeCommand command) {
+        dataBinder.validate();
+        BindingResult bindingResult = dataBinder.getBindingResult();
 
         if (bindingResult.hasErrors()) {
 
